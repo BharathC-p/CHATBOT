@@ -3,7 +3,7 @@ import openai
 import psycopg2
 from flask import Flask, request, jsonify, render_template
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="app/templates")  # ✅ Ensure correct path
 
 # OpenAI API Key (Replace with your key)
 openai.api_key = "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"
@@ -45,7 +45,7 @@ def execute_sql_query(query):
 @app.route("/")
 def home():
     """Renders the chat page"""
-    return render_template("index.html")
+    return render_template("index.html")  # ✅ Ensure "index.html" exists in "app/templates/"
 
 @app.route("/chat", methods=["POST"])
 def chat():
