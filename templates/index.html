@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot</title>
+    <script>
+        async function sendMessage() {
+            let userMessage = document.getElementById("userMessage").value;
+            if (!userMessage) return;
+
+            document.getElementById("response").innerHTML = "Thinking...";
+            
+            let response = await fetch("/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: userMessage })
+            });
+
+            let data = await response.json();
+            document.getElementById("response").innerHTML = `<b>SQL Query:</b> ${data.sql_query} <br> <b>Result:</b> ${JSON.stringify(data.result)}`;
+        }
+    </script>
+</head>
+<body>
+    <h2>Ask a Database Question</h2>
+    <input type="text" id="userMessage" placeholder="Enter your question">
+    <button onclick="sendMessage()">Ask</button>
+    <p id="response"></p>
+</body>
+</html>
