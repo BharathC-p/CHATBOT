@@ -3,7 +3,7 @@ import openai
 import psycopg2
 from flask import Flask, request, jsonify, render_template
 
-app = Flask(__chatbot__)
+app = Flask(__name__)
 
 # OpenAI API Key (Replace with your key)
 openai.api_key = "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"
